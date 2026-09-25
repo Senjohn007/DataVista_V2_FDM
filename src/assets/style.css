@@ -1,0 +1,589 @@
+/* ==========================================================
+   Metro CAD | Incident Severity Decision Support — Theme
+   ========================================================== */
+
+/* ---------- ROOT VARIABLES ---------- */
+:root {
+    --bg-primary: #0d1117;
+    --bg-secondary: #161b22;
+    --bg-tertiary: #0e1e25;
+    --accent-red: #e53e3e;
+    --accent-orange: #dd6b20;
+    --accent-blue: #3182ce;
+    --accent-green: #38a169;
+    --accent-cyan: #00d4ff;
+    --text-primary: #e2e8f0;
+    --text-secondary: #a0aec0;
+    --glass-bg: rgba(22, 27, 34, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- ANIMATED AMBIENT BACKGROUND ---------- */
+.stApp {
+    background: linear-gradient(-45deg, #0d1117, #161b22, #0e1e25, #111927);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ---------- CUSTOM SCROLLBAR ---------- */
+::-webkit-scrollbar       { width: 8px; }
+::-webkit-scrollbar-track { background: #161b22; }
+::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #484f58; }
+
+/* ---------- TYPOGRAPHY ---------- */
+h1, h2, h3 { letter-spacing: -0.5px; }
+
+/* ---------- SIDEBAR ---------- */
+section[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #0d1117 0%, #161b22 50%, #0e1e25 100%);
+    border-right: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+/* ---------- GLASSMORPHISM CONTAINERS ---------- */
+div[data-testid="stVerticalBlock"] > div:has(div.cad-card) {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------- BADGE — CRITICAL ---------- */
+.badge-critical {
+    background: linear-gradient(135deg, #e53e3e 0%, #9b2c2c 100%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: inline-block;
+    text-transform: uppercase;
+    animation: alertGlow 1.8s infinite, badgePulse 0.8s infinite;
+}
+
+@keyframes alertGlow {
+    0%   { box-shadow: 0 0 0 0 rgba(229, 62, 62, 0.7); }
+    70%  { box-shadow: 0 0 0 14px rgba(229, 62, 62, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(229, 62, 62, 0); }
+}
+
+@keyframes badgePulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.03); }
+}
+
+/* ---------- BADGE — MODERATE ---------- */
+.badge-moderate {
+    background: linear-gradient(135deg, #dd6b20 0%, #9c4221 100%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: inline-block;
+    text-transform: uppercase;
+    animation: moderateGlow 2s infinite;
+}
+
+@keyframes moderateGlow {
+    0%   { box-shadow: 0 0 0 0 rgba(221, 107, 32, 0.5); }
+    70%  { box-shadow: 0 0 0 10px rgba(221, 107, 32, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(221, 107, 32, 0); }
+}
+
+/* ---------- BADGE — MINOR ---------- */
+.badge-minor {
+    background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+/* ---------- STATUS LIGHTS ---------- */
+.status-light {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.status-light-green {
+    background: #38a169;
+    box-shadow: 0 0 8px rgba(56, 161, 105, 0.6);
+    animation: statusBlink 2s infinite;
+}
+.status-light-red {
+    background: #e53e3e;
+    box-shadow: 0 0 8px rgba(229, 62, 62, 0.6);
+    animation: statusBlink 0.8s infinite;
+}
+.status-light-amber {
+    background: #dd6b20;
+    box-shadow: 0 0 8px rgba(221, 107, 32, 0.6);
+    animation: statusBlink 1.2s infinite;
+}
+.status-light-cyan {
+    background: #00d4ff;
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
+    animation: statusBlink 1.8s infinite;
+}
+
+@keyframes statusBlink {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.35; }
+}
+
+/* ---------- SCAN LINE ---------- */
+.scan-overlay {
+    position: relative;
+    overflow: hidden;
+}
+.scan-overlay::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+    animation: scanLine 3s linear infinite;
+    opacity: 0.5;
+    pointer-events: none;
+}
+@keyframes scanLine {
+    0%   { top: 0; }
+    100% { top: 100%; }
+}
+
+/* ---------- GLASS CARDS ---------- */
+.card-glass {
+    background: rgba(22, 27, 34, 0.65);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+.card-glass:hover {
+    border-color: rgba(0, 212, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 212, 255, 0.05);
+}
+
+.card-glass-red {
+    background: rgba(45, 24, 24, 0.75);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    border: 1px solid rgba(229, 62, 62, 0.3);
+    padding: 24px;
+    box-shadow: 0 8px 32px rgba(229, 62, 62, 0.1);
+}
+
+.card-glass-orange {
+    background: rgba(45, 32, 21, 0.75);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    border: 1px solid rgba(221, 107, 32, 0.3);
+    padding: 24px;
+    box-shadow: 0 8px 32px rgba(221, 107, 32, 0.1);
+}
+
+.card-glass-blue {
+    background: rgba(19, 35, 56, 0.75);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    border: 1px solid rgba(49, 130, 206, 0.3);
+    padding: 24px;
+    box-shadow: 0 8px 32px rgba(49, 130, 206, 0.1);
+}
+
+.card-glass-green {
+    background: rgba(19, 45, 34, 0.75);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    border: 1px solid rgba(56, 161, 105, 0.3);
+    padding: 24px;
+    box-shadow: 0 8px 32px rgba(56, 161, 105, 0.1);
+}
+
+/* ---------- ANIMATED DIVIDER ---------- */
+.divider-animated {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00d4ff, rgba(0, 212, 255, 0.3), transparent);
+    border: none;
+    margin: 24px 0;
+    animation: dividerPulse 3s ease infinite;
+}
+
+@keyframes dividerPulse {
+    0%, 100% { opacity: 0.5; }
+    50%      { opacity: 1; }
+}
+
+/* ---------- SYSTEM HEADER ---------- */
+.system-header {
+    background: linear-gradient(135deg, rgba(13, 17, 23, 0.95), rgba(22, 27, 34, 0.95));
+    border: 1px solid rgba(0, 212, 255, 0.15);
+    border-radius: 12px;
+    padding: 14px 24px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(8px);
+    animation: fadeInDown 0.6s ease-out;
+}
+
+/* ---------- ENTRANCE ANIMATIONS ---------- */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+.slide-in-left  { animation: slideInLeft  0.5s ease-out; }
+.slide-in-right { animation: slideInRight 0.5s ease-out; }
+.slide-in-up    { animation: fadeInUp     0.5s ease-out; }
+.fade-in        { animation: fadeIn       0.6s ease-out; }
+
+/* ---------- RADAR SWEEP ---------- */
+.radar-container {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+    background: rgba(0, 212, 255, 0.04);
+    display: inline-block;
+}
+.radar-sweep {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 50%; height: 50%;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(0, 212, 255, 0.35) 30deg, transparent 60deg);
+    transform-origin: 0% 0%;
+    animation: radarSweep 2s linear infinite;
+}
+.radar-dot {
+    position: absolute;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: #00d4ff;
+    animation: statusBlink 1.5s infinite;
+}
+@keyframes radarSweep {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* ---------- SEVERITY GAUGE ---------- */
+.severity-gauge {
+    width: 100%; height: 10px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    margin: 8px 0;
+}
+.severity-gauge-fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.5s ease;
+    animation: gaugeShine 2.5s infinite;
+}
+@keyframes gaugeShine {
+    0%, 100% { filter: brightness(1); }
+    50%      { filter: brightness(1.35); }
+}
+
+/* ---------- CONFIDENCE BAR ---------- */
+.confidence-bar {
+    height: 28px;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    margin: 4px 0;
+    background: rgba(255, 255, 255, 0.06);
+}
+.confidence-fill {
+    height: 100%;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    transition: width 1s ease;
+    animation: confidenceGrow 1.2s ease-out;
+}
+@keyframes confidenceGrow {
+    from { width: 0% !important; }
+}
+
+/* ---------- METRIC CARD ---------- */
+.metric-card {
+    background: rgba(22, 27, 34, 0.8);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 16px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------- GLOW TEXT ---------- */
+.glow-text-cyan  { color: #00d4ff;   text-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
+.glow-text-red   { color: #fc8181;   text-shadow: 0 0 10px rgba(229, 62, 62, 0.5); }
+.glow-text-green { color: #68d391;   text-shadow: 0 0 10px rgba(56, 161, 105, 0.5); }
+.glow-text-amber { color: #fbd38d;   text-shadow: 0 0 10px rgba(221, 107, 32, 0.5); }
+
+/* ---------- PULSE RING ---------- */
+.pulse-ring {
+    display: inline-block;
+    position: relative;
+}
+.pulse-ring::before {
+    content: '';
+    position: absolute;
+    top: -4px; left: -4px; right: -4px; bottom: -4px;
+    border-radius: 50%;
+    border: 2px solid rgba(229, 62, 62, 0.6);
+    animation: pulseRing 1.5s infinite;
+}
+@keyframes pulseRing {
+    0%   { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* ---------- RESULT APPEAR ---------- */
+.result-appear {
+    animation: resultAppear 0.8s ease-out;
+}
+@keyframes resultAppear {
+    0%   { opacity: 0; transform: scale(0.85); }
+    50%  { transform: scale(1.02); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* ---------- BUTTON ENHANCEMENTS ---------- */
+.stButton > button[kind="primary"] {
+    background: linear-gradient(135deg, #e53e3e, #c53030) !important;
+    border: 1px solid rgba(229, 62, 62, 0.5) !important;
+    box-shadow: 0 4px 16px rgba(229, 62, 62, 0.3) !important;
+    transition: all 0.3s ease !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+}
+.stButton > button[kind="primary"]:hover {
+    box-shadow: 0 6px 28px rgba(229, 62, 62, 0.5) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* ---------- CIRCUIT GRID OVERLAY ---------- */
+.circuit-grid {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image:
+        linear-gradient(rgba(0, 212, 255, 1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 1) 1px, transparent 1px);
+    background-size: 64px 64px;
+    z-index: 0;
+    animation: gridPulse 6s ease infinite;
+}
+@keyframes gridPulse {
+    0%, 100% { opacity: 0.02; }
+    50%      { opacity: 0.04; }
+}
+
+/* ---------- DISPATCH TIMELINE ---------- */
+.timeline-item {
+    position: relative;
+    padding-left: 32px;
+    margin-bottom: 14px;
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 8px; top: 0; bottom: 0;
+    width: 2px;
+    background: rgba(0, 212, 255, 0.3);
+}
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    left: 4px; top: 8px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #00d4ff;
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+}
+
+/* ---------- FOOTER ---------- */
+.footer-bar {
+    background: rgba(13, 17, 23, 0.92);
+    border-top: 1px solid rgba(0, 212, 255, 0.1);
+    padding: 14px 24px;
+    margin-top: 40px;
+    border-radius: 0 0 12px 12px;
+}
+
+/* ---------- LIVE BADGE ---------- */
+.live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(229, 62, 62, 0.15);
+    border: 1px solid rgba(229, 62, 62, 0.4);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fc8181;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+.live-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #e53e3e;
+    animation: statusBlink 0.8s infinite;
+}
+
+/* ---------- TIER CARD ---------- */
+.tier-card {
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s ease;
+    animation: fadeInUp 0.5s ease-out;
+}
+.tier-card:hover {
+    transform: translateY(-3px);
+}
+
+/* ---------- HEX ICON ---------- */
+.hex-icon {
+    width: 40px; height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.25);
+    border-radius: 10px;
+    margin-right: 8px;
+}
+
+/* ---------- SECTION LABEL ---------- */
+.section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #00d4ff;
+    margin-bottom: 12px;
+}
+
+/* ---------- DATASTREAM BAR ---------- */
+.datastream-bar {
+    height: 3px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(0, 212, 255, 0.4) 20%,
+        rgba(0, 212, 255, 0.8) 50%,
+        rgba(0, 212, 255, 0.4) 80%,
+        transparent 100%);
+    background-size: 200% 100%;
+    animation: datastreamFlow 2s linear infinite;
+    border-radius: 2px;
+    margin: 6px 0;
+}
+@keyframes datastreamFlow {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ---------- CORNER BRACKETS ---------- */
+.corner-brackets {
+    position: relative;
+    padding: 16px;
+    margin: 8px 0;
+}
+.corner-brackets::before,
+.corner-brackets::after {
+    content: '';
+    position: absolute;
+    width: 16px; height: 16px;
+    border-color: rgba(0, 212, 255, 0.3);
+    border-style: solid;
+}
+.corner-brackets::before {
+    top: 0; left: 0;
+    border-width: 2px 0 0 2px;
+}
+.corner-brackets::after {
+    bottom: 0; right: 0;
+    border-width: 0 2px 2px 0;
+}
+
+/* ---------- NOTIFICATION FLASH ---------- */
+.notification-flash {
+    animation: notificationFlash 0.6s ease;
+}
+@keyframes notificationFlash {
+    0%   { background: rgba(0, 212, 255, 0.15); }
+    100% { background: transparent; }
+}
+
+/* ---------- SHIMMER ---------- */
+.shimmer {
+    background: linear-gradient(90deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.05) 50%,
+        rgba(255,255,255,0) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+@keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* ---------- TABS ---------- */
+.stTabs [data-baseweb="tab-list"] { gap: 8px; }
+.stTabs [data-baseweb="tab"] {
+    border-radius: 8px 8px 0 0;
+    background: rgba(22, 27, 34, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
