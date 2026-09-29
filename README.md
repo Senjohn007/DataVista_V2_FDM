@@ -37,7 +37,7 @@ fdm-mini-project/
 │   ├── 02_eda_and_data_insights.ipynb        # Member 2: Target skew, rush-hour peaks & junction risk analysis
 │   ├── 03_cleaning_and_imputation.ipynb      # Member 3: Leakage-free stratified split, domain imputation & mean shift audit (<0.8%)
 │   ├── 04_feature_eng_and_pipeline.ipynb     # Member 4: Temporal engineering, ColumnTransformer export & smoke test
-│   └── 03_modeling.ipynb                     # 4-Algorithm benchmarking, 5-Fold CV, GridSearchCV & export
+│   └── 05_modeling.ipynb                     # 4-Algorithm benchmarking, 5-Fold CV, GridSearchCV & export
 ├── scripts/
 │   └── extract_1m.py                         # Standalone chunk-streaming memory-safe extractor (<80 MB RAM)
 ├── src/
